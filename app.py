@@ -25,4 +25,17 @@ def mongo_connect(url):
         print("Could not connect to MongoDB: %s" % e)
 
 
+def show_memu():
+    print("")
+    print("1: Add a record")
+    print("2: Find a record")
+    print("3: Edit a record")
+    print("4: Delete a record")
+    print("5: Exit")
+
+    option = input("Enter option: ")
+    return option
+
+
 connection = mongo_connect(MONGO_URI)
+show_memu()

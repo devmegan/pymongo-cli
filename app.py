@@ -58,7 +58,7 @@ def menu_loop():
             # todo: add_record()
         elif option == "2":
             print("\nOption 2 selected")
-            # todo: find_record()
+            get_record()
         elif option == "3":
             print("\nOption 3 selected")
             #todo: edit_record()
@@ -74,6 +74,29 @@ def menu_loop():
             print("\nError! Option " + option  + " invalid")
 
 
+# CRUD FUNCTIONS
+def get_record():
+    print("---")
+
+    first = input("Enter first name > ")
+    last = input("Enter last name > ")
+
+    print("\nSearching for a record of: {} {}".format(first, last))
+
+    doc = None
+
+    try:
+        doc = collelection.find_one({"first": first.lower(), "last": last.lower()})
+    except:
+        print("\nError fetching record")
+
+    if not doc:
+        print("\nNo records found matching: {} {}.".format(first, last))
+
+    return doc
+
+
+# ESTABLISH CONNECTION AND SHOW MENU
 connection = mongo_connect(MONGO_URI)
 collection = get_collection(connection, DB_NAME, COLLECTION_NAME)
 

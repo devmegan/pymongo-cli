@@ -44,7 +44,7 @@ def show_menu():
     print("2: Find a record")
     print("3: Edit a record")
     print("4: Delete a record")
-    print("5: Exit")
+    print("5: Exit (q)")
 
     option = input("Enter option: ")
     return option
@@ -65,7 +65,7 @@ def menu_loop():
         elif option == "4":
             print("\nOption 4 selected")
             # todo: delete_record()
-        elif option == "5":
+        elif option == "5" or option == "q":
             print("\nClosing Connection to MongoDB...")
             connection.close()
             print("Connection closed")

@@ -51,8 +51,9 @@ def show_menu():
 
 
 def menu_loop():
-    while True:  # will basically run forever...
-        option = show_menu()  # store result of show_menu function in variable option
+    while True:
+        option = show_menu()
+
         if option == "1":
             print("\nOption 1 selected")
             # todo: add_record()
@@ -64,7 +65,7 @@ def menu_loop():
             #todo: edit_record()
         elif option == "4":
             print("\nOption 4 selected")
-            # todo: delete_record()
+            delete_record()
         elif option == "5" or option == "q":
             print("\nClosing Connection to MongoDB...")
             connection.close()
@@ -94,6 +95,26 @@ def get_record():
         print("\nNo records found matching: {} {}.".format(first, last))
 
     return doc
+
+
+def delete_record():
+    print("\nSearch for record to delete:")
+
+    doc = get_record()
+
+    if not doc:
+        for k, v in doc.items():
+            if k != "_id":
+                print(k.capitalize() + ": " + v.capitalize())
+
+        confirmation = input("\nIs this the record you want to delete? (Y/N) > ")
+
+        if confirmation.lower() == 'y':
+            try:
+                collection.delete_one(doc)
+                print("Record deleted!")
+            except:
+                print("Error deleting the record")
 
 
 # ESTABLISH CONNECTION AND SHOW MENU
